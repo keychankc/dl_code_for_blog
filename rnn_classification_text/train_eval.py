@@ -5,7 +5,7 @@ import torch.nn.functional as F
 from sklearn import metrics
 import time
 
-from rnn_classification_text.utils import get_time_dif
+from utils import get_time_dif
 
 
 def evaluate(config, model, data_iter, _test=False):
@@ -60,6 +60,15 @@ def _eval_result(config, model, test_iter):
     print("Time usage:", time_dif)
 
 def train(config, model, train_iter, dev_iter, test_iter, writer):
+    """
+    :param config: 参数配置对象
+    :param model: 深度学习模型
+    :param train_iter: 训练数据集的迭代器
+    :param dev_iter: 验证数据集的迭代器
+    :param test_iter: 测试数据集的迭代器
+    :param writer: TensorBoard 记录器
+    :return:
+    """
     start_time = time.time()
     model.train()
     optimizer = torch.optim.Adam(model.parameters(), lr=model.learning_rate)

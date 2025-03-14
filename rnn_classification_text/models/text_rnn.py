@@ -3,14 +3,7 @@ import torch.nn as nn
 import pickle as pkl
 
 class Model(nn.Module):
-    """
-       <bound method Module.parameters of Model(
-        (embedding): Embedding(4762, 300)
-        (lstm): LSTM(300, 128, num_layers=2, batch_first=True, dropout=0.5, bidirectional=True)
-        (fc): Linear(in_features=256, out_features=10, bias=True)
-        )>
-        91.16%
-    """
+
     def __init__(self, config, dataset):
         super(Model, self).__init__()
         self.model_name = 'TextRNN'
@@ -32,8 +25,6 @@ class Model(nn.Module):
             vocab = pkl.load(open(config.vocab_path, 'rb'))
             self.n_vocab = len(vocab)
             self.embedding = nn.Embedding(self.n_vocab, config.embed, padding_idx=self.n_vocab - 1)
-        # config.embed 输入特征的维度 config.hidden_size LSTM隐藏层维度 config.num_layers LSTM堆叠的层数
-        # bidirectional 是否使用双向LSTM，得到维度是翻倍的 batch_first 是否把batch维度放在第一位 dropout 层与层的dropout率
         # LSTM双向结构图
         self.lstm = nn.LSTM(config.embed, self.hidden_size, self.num_layers,
                             bidirectional=True, batch_first=True, dropout=self.dropout)

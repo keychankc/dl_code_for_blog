@@ -10,19 +10,6 @@ def conv_and_pool(x, conv):
 
 class Model(nn.Module):
 
-    """
-       <bound method Module.parameters of Model(
-        (embedding): Embedding(4762, 300)
-        (conv): ModuleList(
-            (0): Conv2d(1, 256, kernel_size=(2, 300), stride=(1, 1))
-            (1): Conv2d(1, 256, kernel_size=(3, 300), stride=(1, 1))
-            (2): Conv2d(1, 256, kernel_size=(4, 300), stride=(1, 1))
-        )
-        (dropout): Dropout(p=0.5, inplace=False)
-        (fc): Linear(in_features=768, out_features=10, bias=True)
-        )>
-        91.35%
-    """
     def __init__(self, config, dataset):
         super(Model, self).__init__()
         self.model_name = 'TextCNN'
