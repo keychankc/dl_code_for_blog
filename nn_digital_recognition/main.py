@@ -20,7 +20,7 @@ def get_torch_version():
     return torch.__version__
 
 def load_mnist():
-    path = Path("../data/") / "01_mnist"
+    path = Path("data/mnist")
     filename = "mnist.pkl.gz"
     with gzip.open((path / filename).as_posix(), "rb") as f:
         ((x_train, y_train), (x_valid, y_valid), _) = pickle.load(f, encoding="latin-1")

@@ -15,7 +15,7 @@ from nn_weather_forecast.Weather_forecast_NN import Weather_forecast_NN
 
 # 加载数据
 def load_csv():
-    path = Path("../data/") / "02_temps"
+    path = Path("data")
     filename = "temps.csv"
     return pd.read_csv(path / filename)
 
