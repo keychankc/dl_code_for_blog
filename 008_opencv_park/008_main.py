@@ -1,11 +1,10 @@
 import tensorflow.keras
-import matplotlib.pyplot as plt
-import glob
 import parking
-import pickle
 import random
 import cv2
+import train_model
 from keras.src.saving import load_model
+
 def keras_version():
     print(tensorflow.keras.__version__)  # 3.9.0
 
@@ -34,7 +33,7 @@ def get_parking_area(_image):
     cv_show("draw_parking_image", draw_parking_image)
     return _spot_dict
 
-def img_test(_image, _area_dict, _model, _class_dict):
+def image_test(_image, _area_dict, _model, _class_dict):
     cv_show("image", _image)
     predicted_image = parking.predict_on_image(_image, _area_dict, _model, _class_dict)
     cv_show("predicted_image", predicted_image)
@@ -46,10 +45,18 @@ def video_test(video_name, _area_dict, _model, _class_dict):
 
 
 if __name__ == '__main__':
+    # 1.模型训练，生成car1.keras
+    train_model.train()
+    model = load_model("car1.keras")
+
+    # 2.获取停车场车位区域
     image = cv2.imread("images/frame_0006.jpg")
     area_dict = get_parking_area(image)
-    model = load_model("car1.keras")
+
+    # 3.图片（标出空车位）
     class_dict = {0: 'empty', 1: 'occupied'}
-    # img_test(image, area_dict, model, class_dict)
-    video_test('parking_video.mp4', area_dict, model, class_dict)
+    # image_test(image, area_dict, model, class_dict)
+
+    # 4.视频（标出空车位）
+    # video_test('parking_video.mp4', area_dict, model, class_dict)
 
