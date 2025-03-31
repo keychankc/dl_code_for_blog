@@ -6,7 +6,7 @@ from keras.src.layers import Flatten, Dense
 from keras.src.legacy.preprocessing.image import ImageDataGenerator
 from keras import optimizers
 
-def files_count(path):
+def _files_count(path):
     count = 0
     for entry in os.listdir(path):
         if entry == ".DS_Store":
@@ -44,7 +44,7 @@ def load_model(_img_width, _img_height, _num_classes):
     return model
 
 
-def load_data_generator(_train_data_dir, _valid_data_dir, _img_width, _img_height, _batch_size):
+def _load_data_generator(_train_data_dir, _valid_data_dir, _img_width, _img_height, _batch_size):
     for directory in [_train_data_dir, _valid_data_dir]:
         ds_store_path = os.path.join(directory, ".DS_Store")
         if os.path.exists(ds_store_path):
@@ -81,8 +81,8 @@ def load_data_generator(_train_data_dir, _valid_data_dir, _img_width, _img_heigh
 def train():
     train_data_dir = "data/train"
     valid_data_dir = "data/valid"
-    train_files_count = files_count(train_data_dir)
-    valid_files_count = files_count(valid_data_dir)
+    train_files_count = _files_count(train_data_dir)
+    valid_files_count = _files_count(valid_data_dir)
     batch_size = 32
     epochs = 15
     num_classes = 2
@@ -90,22 +90,22 @@ def train():
     img_height = 32
 
     model = load_model(img_width, img_height, num_classes)
-    train_generator, validation_generator = load_data_generator(train_data_dir, valid_data_dir,
-                                                                img_width, img_height, batch_size)
+    train_generator, validation_generator = _load_data_generator(train_data_dir, valid_data_dir, img_width, img_height,
+                                                                 batch_size)
     # 训练回调
     # 保存最佳模型
     checkpoint = ModelCheckpoint("car1.keras",
-                                 monitor='val_accuracy',  # 监视val_accuracy，如果提高就保存模型
+                                 monitor='val_accuracy',
                                  verbose=1,
-                                 save_best_only=True,  # 只保存最好的模型，避免保存质量较差的模型
-                                 save_weights_only=False,  # 保存整个模型（结构+权重）
-                                 mode='auto')  # 自动选择最大/最小模式（val_accuracy 应该是最大化）
+                                 save_best_only=True,
+                                 save_weights_only=False,
+                                 mode='auto')
     # 如果val_accuracy10轮不变，停止训练
-    early = EarlyStopping(monitor='val_accuracy',  # 监视val_accuracy，如果10轮内没有提高，就提前停止训练
+    early = EarlyStopping(monitor='val_accuracy',
                           min_delta=0,
                           patience=10,
                           verbose=1,
-                          mode='max')  # val_accuracy 应该最大化
+                          mode='max')
 
     steps_per_epoch = np.ceil(train_files_count / batch_size).astype(int)
     validation_steps = np.ceil(valid_files_count / batch_size).astype(int)
@@ -113,7 +113,7 @@ def train():
     model.fit(
         train_generator,  # 训练数据
         steps_per_epoch=steps_per_epoch,  # 每个epoch运行多少个batch（训练批次）
-        epochs=epochs,  # 训练 15 轮
+        epochs=epochs,  # 训练15轮
         validation_data=validation_generator,  # 验证数据集
         validation_steps=validation_steps,  # 验证批次数
         callbacks=[checkpoint, early]
