@@ -41,12 +41,12 @@ def image_test(_image, _area_dict, _model, _class_dict):
     cv2.imwrite(filename, predicted_image)
 
 def video_test(video_name, _area_dict, _model, _class_dict):
-    parking.predict_on_video(video_name, _area_dict, model, _class_dict)
+    parking.predict_on_video(video_name, _area_dict, _model, _class_dict)
 
 
 if __name__ == '__main__':
     # 1.模型训练，生成car1.keras
-    train_model.train()
+    # train_model.train()
     model = load_model("car1.keras")
 
     # 2.获取停车场车位区域
@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     # 3.图片（标出空车位）
     class_dict = {0: 'empty', 1: 'occupied'}
-    # image_test(image, area_dict, model, class_dict)
+    image_test(image, area_dict, model, class_dict)
 
     # 4.视频（标出空车位）
     # video_test('parking_video.mp4', area_dict, model, class_dict)

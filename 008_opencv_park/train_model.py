@@ -51,7 +51,7 @@ def load_data_generator(_train_data_dir, _valid_data_dir, _img_width, _img_heigh
             os.remove(ds_store_path)
 
     train_datagen = ImageDataGenerator(
-        rescale=1. / 255,  # 归一化到 [0,1]
+        rescale=1.0 / 255,  # 归一化到 [0,1]
         horizontal_flip=True,  # 随机水平翻转，适用于左右对称的物体（如汽车、动物）
         fill_mode="nearest",  # 填充方式
         zoom_range=0.1,  # 10% 随机缩放
