@@ -9,4 +9,5 @@
 1. [OpenCV--信用卡卡号识别](https://keychankc.github.io/2025/03/18/opencv-credit-card-ocr/)
 1. [OpenCV--全景图像拼接](https://keychankc.github.io/2025/03/24/image-stitching/)
 1. [OpenCV之停车场车位识别](https://keychankc.github.io/2025/03/31/008-opencv-park/)
+1. [OpenCV之目标追踪](https://keychankc.github.io/2025/04/08/009-opencv-tracking/)
 

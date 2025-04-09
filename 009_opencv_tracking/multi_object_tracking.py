@@ -8,7 +8,6 @@ def get_tracker(name):
         return getattr(cv2, name + "_create")
     return None
 
-
 # opencv已经实现了的追踪算法
 opencv_object_trackers = {
     "boosting": get_tracker("TrackerBoosting"),  # 基于AdaBoost的传统算法，性能较差
@@ -21,11 +20,9 @@ opencv_object_trackers = {
 }
 
 def tracking(video_path, tracker_type="kcf"):
-    # 实例化 multi-object tracker
     trackers = cv2.legacy.MultiTracker_create()
     vs = cv2.VideoCapture(video_path)
 
-    # 视频流
     while True:
         # 取当前帧
         frame = vs.read()
