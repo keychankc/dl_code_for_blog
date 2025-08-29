@@ -13,4 +13,5 @@
 1. [基于U-Net++的细胞分割代码实现](https://keychankc.github.io/2025/05/27/017-unet-cell-segmentation/)
 1. [PPO算法在连续与离散动作空间中的案例实践](https://keychankc.github.io/2025/07/30/026-rl-ppo-discrete-continuous-case/)
 1. [DQN(Deep Q-Network)算法解析与实践](https://keychankc.github.io/2025/08/14/027-rl-dqn-case/)
+1. [A3C 算法原理与超级马里奥实践（下）](https://keychankc.github.io/2025/08/29/028-rl-ac-a3c-mario-case-2/)
 
