@@ -1,0 +1,16 @@
+# 核心深度学习相关
+torch
+torchvision
+
+# 训练框架 & 配置管理
+pytorch-lightning
+hydra-core
+omegaconf
+
+# 实验追踪（可选）
+wandb
+
+# 部署相关
+fastapi
+uvicorn
+Pillow

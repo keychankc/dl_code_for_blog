@@ -1,0 +1,30 @@
+# 主配置文件：集中管理模型 / 数据 / 训练相关超参数
+# 可以通过命令行覆盖，例如：
+#   python run.py data.batch_size=128 train.lr=5e-4
+model:
+  name: simple_cnn
+  num_classes: 10          # CIFAR-10 有 10 个类别
+
+data:
+  batch_size: 64           # 每个 batch 的样本数
+  num_workers: 4           # DataLoader 后台进程数量
+  data_dir: ./data         # 数据集存放路径（会自动下载到这里）
+
+train:
+  max_epochs: 10           # 训练轮数
+  lr: 1e-3                 # 学习率
+
+  # 训练硬件 & 加速配置
+  precision: 32-true       # 默认用最稳定的 float32，可改为 16-mixed
+  accelerator: auto        # auto: 自动选择 gpu / mps / cpu
+  devices: 1               # 使用的设备个数（比如多卡时可以设置成 2 / 4）
+
+  # 梯度累积：显存较小时可以开启
+  accumulate_grad_batches: 1
+
+  # 是否对模型进行 torch.compile 加速（需要 PyTorch 2.0+）
+  compile: false
+
+  # 实验追踪（Weights & Biases），默认关闭
+  use_wandb: false
+  wandb_project: cifar10-project
